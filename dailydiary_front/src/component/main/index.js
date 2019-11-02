@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar'
 
 import './style.scss'
+
+
 class index extends Component {
+
     render() {
         return (
             <div id="main_wrap">
@@ -17,7 +20,7 @@ class index extends Component {
                     <Calendar />
 
                     <div id="diary_wrap">
-                        <textarea>gdg</textarea>
+                        <textarea id="diary_text" placeholder="Input Text..."></textarea>
                     </div>
                 </div>
                

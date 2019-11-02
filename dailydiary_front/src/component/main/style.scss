@@ -23,7 +23,19 @@ body{
             
             width : 100%;
             height : 70%;
-            background-color: blue;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+
+            #diary_text{
+
+                width : 80%;
+                height : 50%;
+                box-sizing: border-box;
+                resize: none;
+            }
         }
 
         .react-calendar{
