@@ -23,23 +23,20 @@ class index extends Component {
     
     render() {
         return (
-            <div id="main_wrap">
-               
+            
+            <div id="action_wrap">
+                <div id="calendar_wrap">
 
-                <div id="action_wrap">
-                    <div id="calendar_wrap">
+                    <Calendar value={this.state.date} onChange={this.onDateChange}/>
 
-                        <Calendar value={this.state.date} onChange={this.onDateChange}/>
-
-                    </div>
-
-                    <div id="diary_wrap">
-                        <input type="date" value={moment(this.state.date).format('YYYY[-]MM[-]DD')} onChange={this.onDateChange} /> 
-                        <textarea id="diary_text" placeholder="Input Text..."></textarea>
-                    </div>
                 </div>
-               
+
+                <div id="diary_wrap">
+                    <input type="date" value={moment(this.state.date).format('YYYY[-]MM[-]DD')} onChange={this.onDateChange} /> 
+                    <textarea id="diary_text" placeholder="Input Text..."></textarea>
+                </div>
             </div>
+           
         );
     }
 }

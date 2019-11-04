@@ -24,8 +24,15 @@
                 cursor: pointer;
                 width : 100px;
                 height: 100px;
-                
+                transition: 0.5s all;
+            
+                &:hover{
+                    transform: scale(1.05, 1.05);
+                    transition: 0.5s all;
+                }
             }
+
+
             &:first-child{
                 border-bottom : 1px  solid white;
             }

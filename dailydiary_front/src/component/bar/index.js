@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Diary from '../../resource/diary.svg'
-import Timer from '../../resource/timer.svg'
+import {Link} from 'react-router-dom';
+import Diary from '../../resource/notepad.png'
+import Timer from '../../resource/timer.png'
 import './style.scss'
 
 class index extends Component {
@@ -8,11 +9,11 @@ class index extends Component {
         return (
             <div id="menu_bar_wrap">
                 <div className="button_wrap">
-                    <img src={Diary} alt="diary"/>
+                    <Link to="/"><img src={Diary} alt="diary"/></Link>
                 </div>
 
                 <div className="button_wrap">
-                    <img src={Timer} alt="timer"/>
+                    <Link to="/timer"><img src={Timer} alt="timer"/></Link>
                 </div>
             </div>
         );
