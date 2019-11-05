@@ -1,3 +1,5 @@
+
+
 body{
     margin : 0 ;
     padding : 0;
@@ -11,10 +13,10 @@ body{
     
 
     #action_wrap{
-        width :90%;
+        width :calc(100vw - 240px);
 
         #calendar_wrap{
-            height : 40%;
+            height : 40vh;
 
             display:flex;
             justify-content: center;
@@ -36,23 +38,134 @@ body{
         #diary_wrap{
             
             width : 100%;
-            height : 60%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+            height : 60vh;
+            
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             box-sizing: border-box;
            
-            border-top : 1px solid black;
+            border-top : 1px solid #DFDFDE;
 
-            #diary_text{
+            #diary_header{
+                width : 100%;
+                height : 10vh;
 
-                width : 80%;
-                height : 50%;
-                box-sizing: border-box;
-                resize: none;
+                display: flex;
+                align-items: center;
+                
+                #diary_header_h1{
+                    margin : 0 40px;
+                    padding : 0;
+                }
             }
+
+
+            #diary_action{
+                width : 100%;
+                height : calc(100% - 10vh);
+              
+
+                #property_add_btn{
+                    border:none;
+                    background : none;
+                    cursor: pointer;
+                    padding : 0 6px;
+                    color: rgba(55, 53, 47, 0.4);
+                    border-radius: 3px;
+                    width : 160px;
+                    height  : 40px;   
+                    transition: background 120ms ease-in 0s;
+                    margin : 0 10px;
+                    &:hover{
+                        transition: background 120ms ease-in 0s;
+                        background : rgba(55, 53, 47, 0.08);
+                    }
+                }
+
+                .propertys_wrap{
+                    list-style-type: none;
+                    margin: 0;
+                    padding : 0;
+
+                  
+
+                    .property_obj{
+                        display:flex;
+                        flex-direction: column;
+                        
+                        
+                        align-items: center;
+                        justify-content: center;
+                        .property{
+                            
+                            width : 90%;
+
+                            input, .property_remove{
+                                
+                                border:none;
+                                color:#37352F;
+                                transition: background 120ms ease-in 0s;
+                                cursor: pointer;
+                                height : 40px;
+                                border-radius: 3px;
+
+                                &:focus{
+                                    outline: none;
+                                }
+
+                                
+                                &:hover{
+                                    transition: background 120ms ease-in 0s;
+                                    background : rgba(55, 53, 47, 0.08);
+                                }
+                            }
+
+                            .property_title{
+                                width : 160px;
+                                padding: 0 6px;
+
+                                &::placeholder{
+                                    color:#D4D3D2;
+                                }
+                            }
+
+                            .property_content{
+                                width : 540px;
+                                padding: 6px 8px 7px;
+
+                                &::placeholder{
+                                    color:#CBCBC9;
+                                }
+                            }
+
+                            .property_remove{
+                                float:right;
+                                width : 40px;
+                                background: none;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+                #diary_text{
+
+                    width : 80%;
+                    height : 50%;
+                    box-sizing: border-box;
+                    resize: none;
+
+                    
+                }
+            }
+
+            #diary_btn_wraps{
+                height : 5vh;
+                width : 100%;
+                box-sizing: border-box;
+
+                background-color : #333;
+            }
+
+            
         }
 
        

@@ -34,24 +34,29 @@ class index extends Component {
     }
 
 
-    permission(){
-        Notification.requestPermission(function (rs) {
-            if(rs === 'denied'){
-                console.log(rs)
-                return "no";
-            }
-
-            else{
-               
-                return "ok";
-            } 
-        })
+    permission=async ()=>{
+        let rs= await Notification.requestPermission();
+        console.log(rs);
+        if(rs === 'denied' || rs === 'default'){
+            return "no";
+        }
+        else{
+            return "ok";
+        } 
     }
 
-    onclicks = e =>{
+    permission_success_onclick = e =>{
         
-        console.log(this)
-    }
+        let options = {
+            body : "Did you commit today?",
+            icon: "https://code.scottshipp.com/wp-content/uploads/2019/05/stickeroid_5bf5475aa0ad1.png"
+        }
+
+            let noti = new Notification("Alarm",options);
+            setTimeout(function () {
+                noti.close();
+            }, 5000);
+        }
     
    
     render() {
@@ -62,8 +67,8 @@ class index extends Component {
                  {
                             this.state.authority === false ? 
                             
-                            <button onClick={this.onclicks}>aaaa</button>
-                            :<button>bbbb</button>
+                            <button >aaaa</button>
+                            :<button onClick={this.permission_success_onclick}>bbbb</button>
                 }
                 
             </div>

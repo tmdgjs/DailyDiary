@@ -32,8 +32,27 @@ class index extends Component {
                 </div>
 
                 <div id="diary_wrap">
-                    <input type="date" value={moment(this.state.date).format('YYYY[-]MM[-]DD')} onChange={this.onDateChange} /> 
-                    <textarea id="diary_text" placeholder="Input Text..."></textarea>
+                    <header id="diary_header">
+                        <h1 id="diary_header_h1">{moment(this.state.date).format('YYYY[년] MM[월] DD[일]')}</h1>
+                    </header>
+
+                    <section id="diary_action">
+
+                        <button id="property_add_btn">+ Add a Category</button>
+                        <ul className="propertys_wrap">
+                            <li className="property_obj">
+                                <div className="property">
+                                    <input className="property_title" placeholder="Property"></input>
+                                    <input className="property_content" placeholder="Empty"></input>
+                                    <button className="property_remove">&times;</button>
+                                </div>                               
+                            </li>
+                        </ul>
+                    </section>
+
+
+
+                    
                 </div>
             </div>
            
