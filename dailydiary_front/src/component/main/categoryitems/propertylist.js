@@ -1,10 +1,13 @@
 import React from 'react';
 
-const propertylist = () => {
+import Propertyitems from './propertyitem'
+
+const propertylist = (props) => {
     return (
-        <div>
+        <ul className="propertys_wrap">
             
-        </div>
+            {props.items && props.items.map(item => <Propertyitems key={item.id} onChange={props.onChange} id={item.id} ppls={item} onRemove={props.onRemove} />)}  
+        </ul>
     );
 };
 

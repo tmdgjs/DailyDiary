@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Calendar from 'react-calendar'
 
-
+import Propertylist from './categoryitems/propertylist'
 
 import moment from 'moment'
 
@@ -11,16 +11,85 @@ import './style.scss'
 
 class index extends Component {
 
+    id= 1;
+    count = 1;
+    
     state = {
-        date : new Date()
+        date : new Date(),
+        propertyls : [
+            { id: 0 ,
+                p_title : 'd안녕',
+                p_content : 'gd'
+            }
+        ],
     }
 
     onDateChange = date => {
         this.setState({ date })
         
         
-      };
-    
+    };
+
+    handleChange = (e) => {
+        let nextState = {};
+        
+        nextState[e.target.id] = e.target.value;
+        this.setState(nextState);
+    }
+
+    handleChange = (id,data) =>{
+        let ppls = this.state.propertyls;
+
+        this.setState({
+            propertyls : ppls.map(
+                pp => id === pp.id ? { ...pp, ...data} : pp
+            )
+        })
+    }
+
+
+    onCreatehandler = () =>{
+        const ppls = this.state.propertyls;
+        this.setState({
+            propertyls: ppls.concat({
+                id: this.id++,
+                p_title : '',
+                p_content : ''
+            }),
+           
+        });
+
+        this.count =  this.count + 1
+        console.log(this.count)
+        
+    }
+
+    onRemove = (id) =>{
+
+        const ppls = this.state.propertyls;
+
+        console.log(this.count)
+        if(this.count > 1){
+            this.setState({
+                propertyls : ppls.filter(ppls=> ppls.id !== id),
+               
+                
+            });
+
+            this.count = this.count - 1
+        }
+        else{
+            alert("at least one collection!");
+            return;
+        }
+        
+    }
+
+    onClicks = e =>{
+        console.log(this.state.propertyls)
+    }
+
+
     render() {
         return (
             
@@ -38,21 +107,15 @@ class index extends Component {
 
                     <section id="diary_action">
 
-                        <button id="property_add_btn">+ Add a Category</button>
-                        <ul className="propertys_wrap">
-                            <li className="property_obj">
-                                <div className="property">
-                                    <input className="property_title" placeholder="Property"></input>
-                                    <input className="property_content" placeholder="Empty"></input>
-                                    <button className="property_remove">&times;</button>
-                                </div>                               
-                            </li>
-                        </ul>
+                        <button id="property_add_btn" onClick={this.onCreatehandler}>+ Add a Category</button>
+                        <Propertylist items={this.state.propertyls} onRemove={this.onRemove} onChange={this.handleChange}/>
+                    
                     </section>
 
-
-
-                    
+                    <footer id="diary_footer">
+                        <button id="diary_add" onClick={this.onClicks}>+</button>
+                    </footer>
+ 
                 </div>
             </div>
            
