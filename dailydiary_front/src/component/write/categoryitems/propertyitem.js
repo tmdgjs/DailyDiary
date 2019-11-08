@@ -5,20 +5,24 @@ class propertyitem extends Component {
     
     constructor(props){
         super(props);
-        console.log(this.props)
         
     }
 
    state = {
-        p_title: this.props.ppls.p_title,
-        p_content: this.props.ppls.p_content,
+        p_title: this.props.property.p_title,
+        p_content: this.props.property.p_content,
     } 
 
-    handleChange = (e) => {
+    handleChange = async(e) => {
         let nextState = {};
         
         nextState[e.target.id] = e.target.value;
-        this.setState(nextState);
+        await this.setState(nextState);
+        this.props.onUpdate(this.props.id,{
+            p_title: this.state.p_title,
+            p_content: this.state.p_content
+        })
+    
     }
     
     render() {

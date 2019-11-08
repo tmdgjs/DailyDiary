@@ -6,7 +6,7 @@ const propertylist = (props) => {
     return (
         <ul className="propertys_wrap">
             
-            {props.items && props.items.map(item => <Propertyitems key={item.id} onChange={props.onChange} id={item.id} ppls={item} onRemove={props.onRemove} />)}  
+            {props.items && props.items.map(item => <Propertyitems key={item.id} onUpdate={props.onUpdate} id={item.id} property={item} onRemove={props.onRemove} />)}  
         </ul>
     );
 };

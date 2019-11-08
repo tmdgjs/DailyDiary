@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-
-import Calendar from 'react-calendar'
-
-
+import Propertylist from './categoryitems/propertylist'
 
 import moment from 'moment'
-
 import './style.scss'
-
-
 class index extends Component {
 
-    id= 6;
+    id = 6; 
     count = 6;
-    
+
     state = {
-        date : new Date(),
+        today : moment(new Date()).format('YYYYMMDD'),
         propertyls : [
             { id: 0 ,
                 p_title : '날씨',
@@ -43,10 +37,6 @@ class index extends Component {
             }
         ],
     }
-
-    onDateChange = date => {
-        this.setState({ date })
-    };
 
     onUpdate = (id,data) =>{
         let property_ls = this.state.propertyls;
@@ -95,44 +85,28 @@ class index extends Component {
     }
     
     write_diary = e =>{
-        console.log(this.state.propertyls)
+        console.log(this.state)
     }
-
 
     render() {
         return (
-            
-            <div id="action_wrap">
-                <div id="calendar_wrap">
-
-                    <Calendar value={this.state.date} onChange={this.onDateChange}/>
-
-                </div>
-
-                <div id="diary_page">
+            <div id="diary_wrap">
                     <header id="diary_header">
-                        <h1 id="diary_header_h1">{moment(this.state.date).format('YYYY[년] MM[월] DD[일]')}</h1>
+                        <h1 id="diary_header_h1">{moment(new Date()).format('YYYY[년] MM[월] DD[일]')}</h1>
                     </header>
 
-                    <section id="diary_contents">
-                        <div id="diary_wrote_list">
-                            <ul id="diary_wrote_ul">
-                                <li className="diary_wrote_item">
-                                    <div className="diary_wrote_title">날씨</div>
-                                    <div className="diary_wrote_txt">맑음</div>
-                                </li>
+                    <section id="diary_action">
 
-                            </ul>
-                        </div>
+                        <button id="property_add_btn" onClick={this.onCreatehandler}>+ Add a Category</button>
+                        <Propertylist items={this.state.propertyls} onRemove={this.onRemove} onUpdate={this.onUpdate}/>
+                    
                     </section>
 
                     <footer id="diary_footer">
-                    날씨 - 지출 - 음식 - 커밋 - 한 일 - 평가 
+                        <button id="diary_add" onClick={this.write_diary}>+</button>
                     </footer>
  
                 </div>
-            </div>
-           
         );
     }
 }

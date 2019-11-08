@@ -5,7 +5,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Home from './component/main'
 import Bar from './component/bar'
 import Timer from './component/timer'
-import Write from'./component/timer'
+import Write from'./component/write'
 
 function App() {
   return (
