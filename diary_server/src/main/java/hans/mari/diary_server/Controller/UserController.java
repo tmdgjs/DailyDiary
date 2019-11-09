@@ -22,4 +22,9 @@ public class UserController {
 
         return this.userService.signup(user);
     }
+
+    @GetMapping("/user/found/{email}")
+    public User user_found(@PathVariable String email){
+        return this.userService.user_found(email);
+    }
 }

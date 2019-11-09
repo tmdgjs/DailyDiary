@@ -1,6 +1,7 @@
 package hans.mari.diary_server.Service;
 
 import hans.mari.diary_server.Domain.User;
+import hans.mari.diary_server.Exception.User.UserExistException;
 import hans.mari.diary_server.Exception.User.UserNotFoundException;
 import hans.mari.diary_server.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signup(User user) {
 
-        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) == null){
-            throw
+        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) != null){
+            throw new UserExistException();
         }
 
         return this.userRepo.save(user);
