@@ -14,6 +14,7 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Autowired
     private DiaryRepo diaryRepo;
+
     @Override
     public List<Diary> dailydiary(String usercode, String today) {
 

@@ -20,6 +20,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signup(User user) {
 
+        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) == null){
+            throw
+        }
+
         return this.userRepo.save(user);
 
     }

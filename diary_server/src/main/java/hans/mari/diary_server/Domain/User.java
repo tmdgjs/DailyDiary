@@ -14,10 +14,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true , nullable = false)
+    @Column(nullable = false)
     private String usercode;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String email; //if you missing usercode
 
 

@@ -11,6 +11,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @GetMapping("/user/login/{usercode}")
     public User user_login(@PathVariable String usercode){
         return this.userService.login(usercode);
@@ -18,6 +19,7 @@ public class UserController {
 
     @PostMapping("/user/signup")
     public User user_join(@RequestBody User user){
-        return user;
+
+        return this.userService.signup(user);
     }
 }
