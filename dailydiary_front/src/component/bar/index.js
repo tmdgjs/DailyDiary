@@ -7,27 +7,31 @@ import Key from '../../resource/key.png'
 import './style.scss'
 
 class index extends Component {
+    
+    logout = e =>{
+        window.location.href = '/';
+    }
+    
     render() {
 
-        let user = 'user';
+        let user = null;
 
         return (
             <div id="menu_bar_wrap">
                 <div className="button_wrap">
-                { user !== 'user' ?
+                { user === null ?
                     <Link to="/login">
                         <img src={Key} alt="login"/>
                         <span>Login</span>
                     </Link> 
                     :
-                    <a>
+                    <a href="/#" onClick={this.logout}>
                         <img src={Key} alt="login"/>
                         <span>Logout</span>
 
                     </a>
                    }
 
-                
                     <Link to="/">
                         <img src={Diary} alt="diary"/>
                         <span>Diary</span>
@@ -37,6 +41,7 @@ class index extends Component {
                         <img src={Pencil} alt="pencil"/>
                         <span>Write</span>
                     </Link>
+
                     <Link to="/timer">
                         <img src={Timer} alt="timer"/>
                         <span>Alarm</span>

@@ -2,59 +2,75 @@ import React, { Component } from 'react';
 import Propertylist from './categoryitems/propertylist'
 
 import moment from 'moment'
+import axios from 'axios'
 import './style.scss'
 class index extends Component {
 
     id = 6; 
     count = 6;
-
+    user = 45678;
+    todaycode = moment(new Date()).format('YYYYMMDD')
     state = {
-        today : moment(new Date()).format('YYYYMMDD'),
-        propertyls : [
+        
+        diary_list : [
             { id: 0 ,
-                p_title : '날씨',
-                p_content : ''
+                propertytitle : '날씨',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
             },
             { id: 1 ,
-                p_title : '지출',
-                p_content : ''
+                propertytitle : '지출',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
             },
             { id: 2 ,
-                p_title : '음식',
-                p_content : ''
+                propertytitle : '음식',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
             },
             { id: 3 ,
-                p_title : '커밋',
-                p_content : ''
+                propertytitle : '커밋',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
             },
             { id: 4 ,
-                p_title : '한 일',
-                p_content : ''
+                propertytitle : '한 일',
+                propertycontent : '',
+                today :this.todaycode,
+                usercode : this.user
             },
             { id: 5 ,
-                p_title : '평가',
-                p_content : ''
+                propertytitle : '평가',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
             }
         ],
     }
 
     onUpdate = (id,data) =>{
-        let property_ls = this.state.propertyls;
+        let property_ls = this.state.diary_list;
 
         this.setState({
-            propertyls : property_ls.map(
+            diary_list : property_ls.map(
                 property => id === property.id ? { ...property, ...data} : property
             )
         })
     }
 
     onCreatehandler = () =>{
-        const ppls = this.state.propertyls;
+        const ppls = this.state.diary_list;
         this.setState({
-            propertyls: ppls.concat({
+            diary_list: ppls.concat({
                 id: this.id++,
-                p_title : '',
-                p_content : ''
+                propertytitle : '',
+                propertycontent : '',
+                today : this.todaycode,
+                user : this.user
             }),
            
         });
@@ -66,11 +82,11 @@ class index extends Component {
 
     onRemove = (id) =>{
 
-        const ppls = this.state.propertyls;
+        const ppls = this.state.diary_list;
 
         if(this.count > 1){
             this.setState({
-                propertyls : ppls.filter(ppls=> ppls.id !== id),
+                diary_list : ppls.filter(ppls=> ppls.id !== id),
                
                 
             });
@@ -84,8 +100,25 @@ class index extends Component {
         
     }
     
-    write_diary = e =>{
-        console.log(this.state)
+    write_diary = async e =>{
+        for(let i = 0 ; i < this.count ; i++){
+            if(this.state.diary_list[i].propertytitle === '' || this.state.diary_list[i].propertycontent === ''){
+                alert("blank?");
+                return;
+            }
+
+        }
+
+        await axios.post("http://localhost:8080/diary/add",this.state.diary_list
+            
+        )
+        .then( response => { 
+            alert("Successful"); console.log(response) } )
+        .catch( response => { 
+            alert("Failed");console.log(response) } );
+        
+        
+         console.log(this.state.diary_list)
     }
 
     render() {
@@ -98,7 +131,7 @@ class index extends Component {
                     <section id="diary_action">
 
                         <button id="property_add_btn" onClick={this.onCreatehandler}>+ Add a Category</button>
-                        <Propertylist items={this.state.propertyls} onRemove={this.onRemove} onUpdate={this.onUpdate}/>
+                        <Propertylist items={this.state.diary_list} onRemove={this.onRemove} onUpdate={this.onUpdate}/>
                     
                     </section>
 

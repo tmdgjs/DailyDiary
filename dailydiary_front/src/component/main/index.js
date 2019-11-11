@@ -13,10 +13,10 @@ class index extends Component {
 
     id= 6;
     count = 6;
-    
+
     state = {
         date : new Date(),
-        propertyls : [
+        diary_list : [
             { id: 0 ,
                 p_title : '날씨',
                 p_content : ''
@@ -49,19 +49,19 @@ class index extends Component {
     };
 
     onUpdate = (id,data) =>{
-        let property_ls = this.state.propertyls;
+        let property_ls = this.state.diary_list;
 
         this.setState({
-            propertyls : property_ls.map(
+            diary_list : property_ls.map(
                 property => id === property.id ? { ...property, ...data} : property
             )
         })
     }
 
     onCreatehandler = () =>{
-        const ppls = this.state.propertyls;
+        const ppls = this.state.diary_list;
         this.setState({
-            propertyls: ppls.concat({
+            diary_list: ppls.concat({
                 id: this.id++,
                 p_title : '',
                 p_content : ''
@@ -76,11 +76,11 @@ class index extends Component {
 
     onRemove = (id) =>{
 
-        const ppls = this.state.propertyls;
+        const ppls = this.state.diary_list;
 
         if(this.count > 1){
             this.setState({
-                propertyls : ppls.filter(ppls=> ppls.id !== id),
+                diary_list : ppls.filter(ppls=> ppls.id !== id),
                
                 
             });
@@ -95,7 +95,7 @@ class index extends Component {
     }
     
     write_diary = e =>{
-        console.log(this.state.propertyls)
+        console.log(this.state.diary_list)
     }
 
 

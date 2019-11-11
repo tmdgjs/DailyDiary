@@ -26,4 +26,11 @@ public class DiaryServiceImpl implements DiaryService {
 
         return diary_dummy;
     }
+
+    @Override
+    public List<Diary> diary_add(List<Diary> diarylist) {
+
+           return this.diaryRepo.saveAll(diarylist);
+
+    }
 }
