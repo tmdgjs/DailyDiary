@@ -9,8 +9,8 @@ POST http://localhost:8080/user/signup
 Content-Type: application/json
 
 {
-  "usercode": 45678,
-  "email" : "zfirez1115@gmail.com"
+  "usercode": "root",
+  "email" : "hansmari1115@gmail.com"
 }
 
 ###
@@ -20,7 +20,7 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/diary/20191111/45678
+GET http://localhost:8080/diary/20191113/45678
 Accept: application/json
 
 ###

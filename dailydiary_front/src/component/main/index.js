@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Calendar from 'react-calendar'
-
-
-
+import {Redirect} from 'react-router-dom'
+import axios from  'axios'
+import Diarylist from './diaryitems/diarylist'
 import moment from 'moment'
 
 import './style.scss'
@@ -13,95 +13,57 @@ class index extends Component {
 
     id= 6;
     count = 6;
+    user = 45678;
+    diary_list = [];
 
     state = {
         date : new Date(),
-        diary_list : [
-            { id: 0 ,
-                p_title : '날씨',
-                p_content : ''
-            },
-            { id: 1 ,
-                p_title : '지출',
-                p_content : ''
-            },
-            { id: 2 ,
-                p_title : '음식',
-                p_content : ''
-            },
-            { id: 3 ,
-                p_title : '커밋',
-                p_content : ''
-            },
-            { id: 4 ,
-                p_title : '한 일',
-                p_content : ''
-            },
-            { id: 5 ,
-                p_title : '평가',
-                p_content : ''
-            }
-        ],
-    }
-
-    onDateChange = date => {
-        this.setState({ date })
-    };
-
-    onUpdate = (id,data) =>{
-        let property_ls = this.state.diary_list;
-
-        this.setState({
-            diary_list : property_ls.map(
-                property => id === property.id ? { ...property, ...data} : property
-            )
-        })
-    }
-
-    onCreatehandler = () =>{
-        const ppls = this.state.diary_list;
-        this.setState({
-            diary_list: ppls.concat({
-                id: this.id++,
-                p_title : '',
-                p_content : ''
-            }),
-           
-        });
-
-        this.count =  this.count + 1
-        
-        
-    }
-
-    onRemove = (id) =>{
-
-        const ppls = this.state.diary_list;
-
-        if(this.count > 1){
-            this.setState({
-                diary_list : ppls.filter(ppls=> ppls.id !== id),
-               
-                
-            });
-
-            this.count = this.count - 1
-        }
-        else{
-            alert("at least one collection!");
-            return;
-        }
-        
+        today : moment(this.date).format('YYYYMMDD'),
+       
     }
     
-    write_diary = e =>{
-        console.log(this.state.diary_list)
+    async componentDidMount(){
+        await this.calldiary();
+        
     }
+
+    async componentDidUpdate(){
+        await this.calldiary();
+    }
+
+    async calldiary(){
+
+
+        await axios.get(`http://localhost:8080/diary/${this.state.today}/${this.user}`)
+        .then( response => { 
+            this.diary_list = [];
+        
+            this.diary_list = response;
+            console.log(this.diary_list.data)
+            
+        })
+        .catch( response => { 
+            this.diary_list = []; } );
+    }
+
+    onDateChange =  date => {
+        
+        this.setState({ 
+            date : date,
+            today : moment(date).format('YYYYMMDD')
+        })
+    
+    };
+
 
 
     render() {
+        console.log(this.props.store)
+        if(this.user === null){
+            return <Redirect to='/login' />
+        }
         return (
-            
+           
             <div id="action_wrap">
                 <div id="calendar_wrap">
 
@@ -116,13 +78,8 @@ class index extends Component {
 
                     <section id="diary_contents">
                         <div id="diary_wrote_list">
-                            <ul id="diary_wrote_ul">
-                                <li className="diary_wrote_item">
-                                    <div className="diary_wrote_title">날씨</div>
-                                    <div className="diary_wrote_txt">맑음</div>
-                                </li>
-
-                            </ul>
+                            <Diarylist items={this.diary_list}/>
+                            
                         </div>
                     </section>
 

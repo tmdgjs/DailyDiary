@@ -5,6 +5,7 @@ import Timer from '../../resource/timer.png'
 import Pencil from '../../resource/pencil.png'
 import Key from '../../resource/key.png'
 import './style.scss'
+import {connect} from 'react-redux'
 
 class index extends Component {
     
@@ -13,7 +14,7 @@ class index extends Component {
     }
     
     render() {
-
+        console.log(this.props.color)
         let user = null;
 
         return (
@@ -52,4 +53,11 @@ class index extends Component {
     }
 }
 
-export default index;
+let mapStateToProps = (state)=>{
+    return{
+      color: state.diary.color
+    }
+  }
+
+
+export default connect(mapStateToProps)(index);
