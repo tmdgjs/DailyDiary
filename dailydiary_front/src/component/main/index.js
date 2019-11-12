@@ -13,7 +13,7 @@ class index extends Component {
 
     id= 6;
     count = 6;
-    user = 45678;
+    user = null;
     diary_list = [];
 
     state = {

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './style.scss'
+import {connect} from 'react-redux'
+import { signup , onChange} from '../action';
+import axios from 'axios'
 class index extends Component {
 
     constructor(props){
@@ -9,7 +12,6 @@ class index extends Component {
             usercode : '',
             email : ''
            
-           
         }
     }
 
@@ -17,7 +19,8 @@ class index extends Component {
         let nextState = {};
         
         nextState[e.target.id] = e.target.value;
-        await this.setState(nextState);
+        console.log(e)
+        //await this.props.update(e)
         
     
     }
@@ -27,6 +30,20 @@ class index extends Component {
         const dummy = Object.assign({},this.state,{usercode : usercode})
         console.log(dummy)
     } 
+
+    signup_btn = async e =>{
+       
+        /*await this.props.signup(this.state.email)
+
+        await axios.post("http://localhost:8080/user/signup",this.props.user
+        )
+        .then( response => { 
+            alert("Successful"); console.log(response) } )
+        .catch( response => { 
+            alert("Failed");console.log(response) } );*/
+
+       console.log(this.props.user.email)
+    }
 
    
 
@@ -54,13 +71,13 @@ class index extends Component {
 
                     <div className="login_action_wrap">
                         
-                        <input  id="email" placeholder="EMAIL" value={this.state.email} onChange={this.handleChange}/>  
+                        <input  id="email" placeholder="EMAIL" value={this.props.user.email} onChange={this.handleChange}/>  
                         
                     </div>
                    
                    
                     <div className="login_action_button_wrap">
-                        <button>Signup</button>
+                        <button onClick={this.signup_btn}>Signup</button>
                     </div>
                 </div>
 
@@ -70,4 +87,20 @@ class index extends Component {
     }
 }
 
-export default index;
+let mapStateToProps = (state)=>{
+   
+    return{
+      user : state.user
+    }
+  }
+
+  let mapDispatchToProps = (dispatch) =>{
+      return{
+        signup : (email) => dispatch(signup(email)),
+        update : e => dispatch(onChange(e))
+      } 
+  }
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(index);;

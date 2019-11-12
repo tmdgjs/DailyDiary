@@ -14,7 +14,7 @@ class index extends Component {
     }
     
     render() {
-        console.log(this.props.color)
+        console.log(this.props)
         let user = null;
 
         return (
@@ -54,10 +54,11 @@ class index extends Component {
 }
 
 let mapStateToProps = (state)=>{
+    console.log(state)
     return{
-      color: state.diary.color
+      color: state.diary,
+      user : state.user
     }
   }
-
 
 export default connect(mapStateToProps)(index);

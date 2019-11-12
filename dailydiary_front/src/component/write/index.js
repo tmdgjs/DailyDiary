@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Propertylist from './categoryitems/propertylist'
-
+import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import axios from 'axios'
 import './style.scss'
@@ -8,7 +8,7 @@ class index extends Component {
 
     id = 6; 
     count = 6;
-    user = 45678;
+    user = null;
     todaycode = moment(new Date()).format('YYYYMMDD')
     state = {
         
@@ -122,6 +122,9 @@ class index extends Component {
     }
 
     render() {
+        if(this.user === null){
+            return <Redirect to='/login' />
+        }
         return (
             <div id="diary_wrap">
                     <header id="diary_header">
