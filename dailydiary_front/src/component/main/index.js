@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom'
 import axios from  'axios'
 import Diarylist from './diaryitems/diarylist'
 import moment from 'moment'
+import {connect} from 'react-redux'
 
 import './style.scss'
 
@@ -13,7 +14,7 @@ class index extends Component {
 
     id= 6;
     count = 6;
-    user = null;
+    user = this.props.user.usercode;
     diary_list = [];
 
     state = {
@@ -59,7 +60,7 @@ class index extends Component {
 
     render() {
         console.log(this.props.store)
-        if(this.user === null){
+        if(this.user === ''){
             return <Redirect to='/login' />
         }
         return (
@@ -94,4 +95,12 @@ class index extends Component {
     }
 }
 
-export default index;
+let mapStateToProps = (state)=>{
+   
+    return{
+      
+      user : state.loginuser
+    }
+  }
+
+export default connect(mapStateToProps)(index);

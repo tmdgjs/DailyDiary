@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './style.scss'
 import {connect} from 'react-redux'
-import { signup , onChange} from '../action';
+import { signup, login, logincheck } from '../action';
 import axios from 'axios'
+import {Redirect} from 'react-router-dom';
 class index extends Component {
 
     constructor(props){
@@ -10,44 +11,59 @@ class index extends Component {
 
         this.state = {
             usercode : '',
-            email : ''
+            email : '',
+            gotomain : false
            
         }
     }
 
-    handleChange = async(e) => {
-        let nextState = {};
-        
-        nextState[e.target.id] = e.target.value;
-        console.log(e)
-        //await this.props.update(e)
+    handleChange = (e) => {
+     
+        let newstate = {};
+        newstate[e.target.id] = e.target.value;
+        this.setState(newstate)
         
     
     }
 
-    handleClick = e =>{
-        const usercode = Math.floor(Math.random() * (99999-11111) + 11111);
-        const dummy = Object.assign({},this.state,{usercode : usercode})
-        console.log(dummy)
-    } 
-
     signup_btn = async e =>{
        
-        /*await this.props.signup(this.state.email)
+        await this.props.signup(this.state.email)
 
         await axios.post("http://localhost:8080/user/signup",this.props.user
         )
         .then( response => { 
-            alert("Successful"); console.log(response) } )
+            alert("유저코드는 "+this.props.user.usercode); console.log(response)
+            this.setState({email : '', usercode : this.props.user.usercode}) })
         .catch( response => { 
-            alert("Failed");console.log(response) } );*/
+            alert("Failed");console.log(response) } );
+  
+    }
 
-       console.log(this.props.user.email)
+    login_btn = async e => {
+    
+        await this.props.login(this.state.usercode)
+        await axios.get(`http://localhost:8080/user/login/${this.props.user.usercode}`)
+        .then( response => { 
+
+            this.props.logincheck(this.state.usercode)
+            console.log(this.props)
+            alert("hi : "+this.props.loginuser.usercode)
+            this.setState({gotomain : true});
+                
+        })
+        .catch( response => { 
+            console.log(response) } );
+        
+
     }
 
    
 
     render() {
+        if(this.state.gotomain===true){
+            return (<Redirect to="/" />)
+        }
         return (
             <div id="userpage_wrap">
                 <div id="login_wrap">
@@ -60,7 +76,7 @@ class index extends Component {
                         
                     </div>
                     <div className="login_action_button_wrap">
-                        <button>Login</button>
+                        <button onClick={this.login_btn}>Login</button>
                     </div>
                 </div>
 
@@ -71,7 +87,7 @@ class index extends Component {
 
                     <div className="login_action_wrap">
                         
-                        <input  id="email" placeholder="EMAIL" value={this.props.user.email} onChange={this.handleChange}/>  
+                        <input  id="email" placeholder="EMAIL" value={this.state.email} onChange={this.handleChange}/>  
                         
                     </div>
                    
@@ -88,19 +104,22 @@ class index extends Component {
 }
 
 let mapStateToProps = (state)=>{
-   
+    console.log(state)
     return{
-      user : state.user
+      user : state.user,
+      loginuser : state.loginuser
     }
   }
 
   let mapDispatchToProps = (dispatch) =>{
       return{
         signup : (email) => dispatch(signup(email)),
-        update : e => dispatch(onChange(e))
+        login : (usercode) => dispatch(login(usercode)),
+        logincheck : (usercode) => dispatch(logincheck(usercode))
+
       } 
   }
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(index);;
+export default connect(mapStateToProps,mapDispatchToProps)(index);

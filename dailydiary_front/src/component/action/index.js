@@ -15,13 +15,20 @@ export const signup = (email) => {
 
 }
 
-export const onChange = async e =>{
+export const login = (usercode) => {
     return {
-        type:types.ONCHANGE,
-        e
+        type : types.LOGIN,
+        usercode
     }
-    
 }
+
+export const logincheck = (usercode) => {
+    return {
+        type : types.LOGINCHECK,
+        usercode
+    }
+}
+
 
 
 

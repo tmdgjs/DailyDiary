@@ -1,5 +1,122 @@
 #timer_wrap{
-    width : 90%;
+     width: calc(100vw - 240px);
 
     
+
+    font-family: "Open Sans","Segoe UI",sans-serif;
+
+    span{
+        height : 5vh;
+        width : 100%;
+        display: flex;
+        justify-content: flex-end;
+        
+        #permission_ckbtn{
+            font-family: "Open Sans","Segoe UI",sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            padding: 10px 16px;
+            border-radius: 0 0 0 3px;
+            color: #fff;
+            background-color: #f0ad4e;
+            border-color: #eea236;
+            border:none;
+            transition: background 120ms ease-in 0s;
+            &:hover{
+                transition: background 120ms ease-in 0s;
+                background-color: #ec971f;
+                border-color: #d58512;
+            }
+        }
+    }
+    
+
+    #timer_header{
+        height : 25vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        
+        
+        h1{
+            margin : 0;
+            padding : 0;
+            font-weight: 100;
+        }
+    }
+
+    #timer_action_wrap{
+        height : 70vh;
+        width : 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: column;
+
+        #timer_action_input_wrap, #timer_action_button_wrap{
+            height : 40%;
+            width : 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Open Sans","Segoe UI",sans-serif;
+        }
+
+        #timer_action_input_wrap{
+            width : 70%;
+            
+
+            justify-content: space-around;
+
+            input{
+                height: 48px;
+                border-width: 2px;
+                box-shadow: none;
+                padding: 10px 12px;
+                border:2px solid #eaeaea;;
+                box-sizing: border-box;
+                transition: border 120ms ease-in 0s;
+                &:focus{
+                    box-shadow: none;
+                    border: 2px solid #d1d1d1;
+                    outline: none;
+                    transition: border 120ms ease-in 0s;
+                }
+                
+            }
+
+            
+        }
+
+        #timer_action_button_wrap{
+      
+            
+
+            button{
+                cursor : pointer;
+                width : 100px;
+                height : 45px;
+                border:none;
+                background : #59B87E;
+                color : #fff;
+                padding: 8px 12px;
+                font-size : 14px;
+                
+                letter-spacing:2px;
+                transition: all 120ms ease-in 0s;
+                &:hover{
+                    transition: all 120ms ease-in 0s;
+                    background: #4aae71;
+                }
+            }
+        }
+
+    }
 }

@@ -14,13 +14,13 @@ class index extends Component {
     }
     
     render() {
-        console.log(this.props)
-        let user = null;
-
+     
+        let user = this.props.user.usercode;
+        console.log(user)
         return (
             <div id="menu_bar_wrap">
                 <div className="button_wrap">
-                { user === null ?
+                { user === '' ?
                     <Link to="/login">
                         <img src={Key} alt="login"/>
                         <span>Login</span>
@@ -54,10 +54,10 @@ class index extends Component {
 }
 
 let mapStateToProps = (state)=>{
-    console.log(state)
+   
     return{
-      color: state.diary,
-      user : state.user
+      
+      user : state.loginuser
     }
   }
 

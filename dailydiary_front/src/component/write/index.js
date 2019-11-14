@@ -4,11 +4,13 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import axios from 'axios'
 import './style.scss'
+import {connect} from 'react-redux'
 class index extends Component {
 
     id = 6; 
     count = 6;
-    user = null;
+    user = this.props.user.usercode;
+    
     todaycode = moment(new Date()).format('YYYYMMDD')
     state = {
         
@@ -122,7 +124,7 @@ class index extends Component {
     }
 
     render() {
-        if(this.user === null){
+        if(this.user === ''){
             return <Redirect to='/login' />
         }
         return (
@@ -147,4 +149,12 @@ class index extends Component {
     }
 }
 
-export default index;
+let mapStateToProps = (state)=>{
+   
+    return{
+      
+      user : state.loginuser
+    }
+  }
+
+export default connect(mapStateToProps)(index);

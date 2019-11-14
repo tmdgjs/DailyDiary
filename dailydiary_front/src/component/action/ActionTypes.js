@@ -1,3 +1,4 @@
 export const READ = 'READ';
 export const SIGNUP = 'SIGNUP';
-export const ONCHANGE = 'ONCHANGE';
+export const LOGIN = 'LOGIN';
+export const LOGINCHECK = 'LOGINCHECK'

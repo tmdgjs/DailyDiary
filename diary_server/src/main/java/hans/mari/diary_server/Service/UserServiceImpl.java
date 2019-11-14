@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signup(User user) {
 
-        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) != null){
+        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) != null ||
+                this.userRepo.findByEmail(user.getEmail()).orElse(null) != null){
             throw new UserExistException();
         }
 
