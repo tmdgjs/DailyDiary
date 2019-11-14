@@ -15,56 +15,55 @@ class index extends Component {
     id= 6;
     count = 6;
     user = this.props.user.usercode;
-    diary_list = [];
 
     state = {
         date : new Date(),
         today : moment(this.date).format('YYYYMMDD'),
-       
+        dump : '',
+        diary_list : []
+    }
+
+    componentWillMount(){
+        this.calldiary(this.state.today, this.user)
     }
     
-    async componentDidMount(){
-        await this.calldiary();
-        
-    }
-
-    async componentDidUpdate(){
-        await this.calldiary();
-    }
-
-    async calldiary(){
-
-
-        await axios.get(`http://localhost:8080/diary/${this.state.today}/${this.user}`)
+     calldiary = (today, user)=>{
+        axios.get(`http://localhost:8080/diary/${today}/${user}`)
         .then( response => { 
-            this.diary_list = [];
-        
-            this.diary_list = response;
-            console.log(this.diary_list.data)
-            
+            this.setState({diary_list: response})
         })
-        .catch( response => { 
-            this.diary_list = []; } );
+        .catch( e => { 
+           this.setState({diary_list: []}) 
+        }
+        );
     }
 
-    onDateChange =  date => {
+    onDateChange =  async date => {
         
+        if(date == null){
+            return;
+        }
+
+        let today =  moment(date).format('YYYYMMDD')
+
         this.setState({ 
-            date : date,
-            today : moment(date).format('YYYYMMDD')
+            date,
+            today
         })
-    
+
+        this.calldiary(today, this.user)
     };
 
+    
 
 
     render() {
-        console.log(this.props.store)
+        console.log("ㅎㅇ")
         if(this.user === ''){
             return <Redirect to='/login' />
         }
         return (
-           
+            
             <div id="action_wrap">
                 <div id="calendar_wrap">
 
@@ -79,13 +78,15 @@ class index extends Component {
 
                     <section id="diary_contents">
                         <div id="diary_wrote_list">
-                            <Diarylist items={this.diary_list}/>
+                            
+                            <Diarylist items={this.state.diary_list}/>
                             
                         </div>
                     </section>
 
                     <footer id="diary_footer">
                     날씨 - 지출 - 음식 - 커밋 - 한 일 - 평가 
+                
                     </footer>
  
                 </div>

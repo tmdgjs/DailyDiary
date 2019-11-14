@@ -10,7 +10,7 @@ class index extends Component {
         super(props);
 
         this.state = {
-            usercode : '',
+            usercode : 92114,
             email : '',
             gotomain : false
            
@@ -47,13 +47,14 @@ class index extends Component {
         .then( response => { 
 
             this.props.logincheck(this.state.usercode)
-            console.log(this.props)
-            alert("hi : "+this.props.loginuser.usercode)
+            
+            //alert("hi : "+this.props.loginuser.usercode)
             this.setState({gotomain : true});
                 
         })
         .catch( response => { 
-            console.log(response) } );
+            console.log(response)
+        alert("[error] usercode : "+this.state.usercode+" is not found") } );
         
 
     }
@@ -104,7 +105,7 @@ class index extends Component {
 }
 
 let mapStateToProps = (state)=>{
-    console.log(state)
+ 
     return{
       user : state.user,
       loginuser : state.loginuser

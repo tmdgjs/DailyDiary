@@ -1,9 +1,6 @@
 import * as types from '../action/ActionTypes';
 import { combineReducers } from 'redux';
 
-const diarylistInitState ={
-    color : 'red'
-}
 
 const userInitState = {
     usercode : '',
@@ -13,23 +10,6 @@ const loginuserInitState ={
     usercode : ''
 }
 
-const diary = (state = diarylistInitState ,  action) => {
-    
-
-    if(state === undefined){
-        return state ; 
-
-        }
-    
-
-    switch(action.type){
-        case types.READ:
-            return state;
-
-        default:
-            return state;
-    }        
-}
 
 const user = (state = userInitState, action) => {
     const usercode = Math.floor(Math.random() * (99999-11111) + 11111);
@@ -68,7 +48,7 @@ const loginuser = (state = loginuserInitState, action) => {
 }
 
 const diaryApp = combineReducers({
-    diary,
+    
     user,
     loginuser
 });

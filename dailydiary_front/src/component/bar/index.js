@@ -16,7 +16,7 @@ class index extends Component {
     render() {
      
         let user = this.props.user.usercode;
-        console.log(user)
+    
         return (
             <div id="menu_bar_wrap">
                 <div className="button_wrap">

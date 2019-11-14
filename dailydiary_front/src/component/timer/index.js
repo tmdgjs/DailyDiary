@@ -92,16 +92,18 @@ class index extends Component {
         }
 
         
-        let hour_m = this.state.hour * 1000 * 360;
+        let hour_m = this.state.hour * 1000 * 3600;
         let min_m = this.state.min * 1000 * 60;
 
         alert("알람이 설정되었습니다.")
-        setTimeout(function(){
+        new Promise((resolve, reject)=>{
+            setTimeout(()=>resolve(), hour_m + min_m); 
+        }).then(v=>{
             let noti = new Notification("Alarm",options);
-            setTimeout(function () {
-                noti.close();
-            }, 5000);
-        },hour_m + min_m); 
+            setTimeout(()=> noti.close(), 5000);
+        }).catch(e=>{
+
+        })
 
         //promise 쓸것
 
