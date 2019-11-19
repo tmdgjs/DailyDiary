@@ -3,9 +3,9 @@
 
 ## 개발 스택
 
--React
--Redux
--React-redux
--React router
--SASS
--Spring-Boot
+ -React
+ -Redux
+ -React-redux
+ -React router
+ -SASS
+ -Spring-Boot
