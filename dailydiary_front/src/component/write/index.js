@@ -128,7 +128,7 @@ class index extends Component {
         )
         .then( response => { 
             alert("Successful"); console.log(response) 
-            this.setState(this.state.iswrite = true)    
+            this.setState({iswrite : true})    
         } )
         .catch( response => { 
             alert("Failed");console.log(response) } );
