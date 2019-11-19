@@ -7,13 +7,13 @@ import './style.scss'
 import {connect} from 'react-redux'
 class index extends Component {
 
-    id = 6; 
-    count = 6;
+    id = 8; 
+    count = 8;
     user = this.props.user.usercode;
     
     todaycode = moment(new Date()).format('YYYYMMDD')
     state = {
-        
+        iswrite : false,
         diary_list : [
             { id: 0 ,
                 propertytitle : '날씨',
@@ -28,24 +28,36 @@ class index extends Component {
                 usercode : this.user
             },
             { id: 2 ,
-                propertytitle : '음식',
+                propertytitle : '아침',
                 propertycontent : '',
                 today : this.todaycode,
                 usercode : this.user
             },
             { id: 3 ,
-                propertytitle : '커밋',
+                propertytitle : '점심',
                 propertycontent : '',
                 today : this.todaycode,
                 usercode : this.user
             },
             { id: 4 ,
+                propertytitle : '저녁',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
+            },
+            { id: 5 ,
+                propertytitle : '커밋',
+                propertycontent : '',
+                today : this.todaycode,
+                usercode : this.user
+            },
+            { id: 6 ,
                 propertytitle : '한 일',
                 propertycontent : '',
                 today :this.todaycode,
                 usercode : this.user
             },
-            { id: 5 ,
+            { id: 7 ,
                 propertytitle : '평가',
                 propertycontent : '',
                 today : this.todaycode,
@@ -115,7 +127,9 @@ class index extends Component {
             
         )
         .then( response => { 
-            alert("Successful"); console.log(response) } )
+            alert("Successful"); console.log(response) 
+            this.setState(this.state.iswrite = true)    
+        } )
         .catch( response => { 
             alert("Failed");console.log(response) } );
         
@@ -126,6 +140,10 @@ class index extends Component {
     render() {
         if(this.user === ''){
             return <Redirect to='/login' />
+        }
+
+        if(this.state.iswrite){
+            return <Redirect to='/' />
         }
         return (
             <div id="diary_wrap">

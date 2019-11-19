@@ -10,7 +10,7 @@ class index extends Component {
         super(props);
 
         this.state = {
-            usercode : 92114,
+            usercode : '',
             email : '',
             gotomain : false
            

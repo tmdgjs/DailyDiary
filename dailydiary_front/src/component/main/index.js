@@ -54,11 +54,7 @@ class index extends Component {
         this.calldiary(today, this.user)
     };
 
-    
-
-
     render() {
-        console.log("ㅎㅇ")
         if(this.user === ''){
             return <Redirect to='/login' />
         }
@@ -85,7 +81,7 @@ class index extends Component {
                     </section>
 
                     <footer id="diary_footer">
-                    날씨 - 지출 - 음식 - 커밋 - 한 일 - 평가 
+                        '지출 - 한 일' 은 필수
                 
                     </footer>
  
