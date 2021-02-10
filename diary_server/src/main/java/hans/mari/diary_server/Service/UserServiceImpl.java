@@ -13,20 +13,33 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
 
     @Override
-    public User login(String usercode) {
+    public User login(String userCode) {
 
-        return this.userRepo.findByUsercode(usercode).orElseThrow(UserNotFoundException::new);
+        try{
+            return this.userRepo.findByUsercode(userCode).orElseThrow(UserNotFoundException::new);
+        }catch (UserNotFoundException e){
+            System.out.println(e.getMessage());
+            return new User();
+        }
+
     }
 
     @Override
     public User signup(User user) {
 
-        if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) != null ||
-                this.userRepo.findByEmail(user.getEmail()).orElse(null) != null){
-            throw new UserExistException();
+        try{
+            if(this.userRepo.findByUsercode(user.getUsercode()).orElse(null) != null ||
+                    this.userRepo.findByEmail(user.getEmail()).orElse(null) != null){
+                throw new UserExistException();
+            }
+
+            return this.userRepo.save(user);
+        }catch (UserExistException e){
+            e.printStackTrace();
+            return new User();
         }
 
-        return this.userRepo.save(user);
+
 
     }
 
