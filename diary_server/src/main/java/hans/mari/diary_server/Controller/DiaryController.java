@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/diary")
 public class DiaryController {
 
     @Autowired
     public DiaryService diaryService;
 
-    @GetMapping("/diary/{today}/{usercode}")
+    @GetMapping("/{today}/{usercode}")
     public List<Diary> today_diary(@PathVariable String usercode, @PathVariable String today){
         return diaryService.dailydiary(usercode,today);
     }
 
-    @PostMapping("/diary/add")
+    @PostMapping("/add")
     public List<Diary> diary_add(@RequestBody List<Diary> diaryList){
         return diaryService.diary_add(diaryList);
     }

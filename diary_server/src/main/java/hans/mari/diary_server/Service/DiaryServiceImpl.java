@@ -7,6 +7,7 @@ import hans.mari.diary_server.Repository.DiaryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,13 +19,20 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Diary> dailydiary(String usercode, String today) {
 
-        List<Diary> diary_dummy = diaryRepo.findByUsercodeAndAndToday(usercode,today);
+        List<Diary> todayDiary = diaryRepo.findByUsercodeAndAndToday(usercode,today);
 
-        if(diary_dummy.size() <= 0){
-            throw new DiaryfoundException();
+        try{
+
+            if(todayDiary.size() <= 0){
+                throw new DiaryfoundException();
+            }
+
+            return todayDiary;
+        }
+        catch (DiaryfoundException e){
+            return new ArrayList<>();
         }
 
-        return diary_dummy;
     }
 
     @Override
