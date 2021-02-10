@@ -81,8 +81,6 @@ class index extends Component {
                     </section>
 
                     <footer id="diary_footer">
-                        '지출 - 한 일' 은 필수
-                
                     </footer>
  
                 </div>

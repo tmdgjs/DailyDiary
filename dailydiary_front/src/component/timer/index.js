@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import './style.scss'
 class index extends Component {
 
-
-    
-
     constructor(props){
         super(props);
 
@@ -21,19 +18,17 @@ class index extends Component {
 
     
     alert_permission = async(e) => {
-        
-        
-            if(await this.permission() === 'no'){
-                alert("gd")
-                return;
-            }
+    
+        if(await this.permission() === 'no'){
+            return;
+        }
 
-            else{
-               
-                this.setState({
-                    authority : true
-                });
-            }
+        else{
+            
+            this.setState({
+                authority : true
+            });
+        }
     }
 
     timeonChange = e =>{
@@ -66,10 +61,8 @@ class index extends Component {
         
     }
 
-
-
-    permission=async ()=>{
-        let rs= await Notification.requestPermission();
+    permission = async () =>{
+        let rs = await Notification.requestPermission();
         console.log(rs);
         if(rs === 'denied' || rs === 'default'){
             return "no";
@@ -82,33 +75,27 @@ class index extends Component {
     permission_success_onclick = e =>{
 
         if(this.state.hour === '' || this.state.min === ''){
-            alert("error")
+            alert("Error")
             return;
         }
         
         let options = {
-            body : "알람입니다",
+            body : "타이머",
             icon: "https://github.com/tmdgjs/DailyDiary/blob/master/dailydiary_front/src/resource/timer.png?raw=true"
         }
-
         
         let hour_m = this.state.hour * 1000 * 3600;
         let min_m = this.state.min * 1000 * 60;
 
-        alert("알람이 설정되었습니다.")
+        alert("타이머가 설정되었습니다.")
         new Promise((resolve, reject)=>{
-            setTimeout(()=>resolve(), hour_m + min_m); 
-        }).then(v=>{
-            let noti = new Notification("Alarm",options);
-            setTimeout(()=> noti.close(), 5000);
-        }).catch(e=>{
+                setTimeout(()=>resolve(), hour_m + min_m); 
+            }).then(v=>{
+                let noti = new Notification("Alarm",options);
+                setTimeout(()=> noti.close(), 5000);
+            }).catch(e=>{
 
-        })
-
-        //promise 쓸것
-
-           
-            
+            })
         }
     
    

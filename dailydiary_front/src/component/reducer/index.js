@@ -10,7 +10,6 @@ const loginuserInitState ={
     usercode : ''
 }
 
-
 const user = (state = userInitState, action) => {
     const usercode = Math.floor(Math.random() * (99999-11111) + 11111);
   

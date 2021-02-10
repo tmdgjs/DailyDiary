@@ -27,6 +27,10 @@ class index extends Component {
     }
 
     signup_btn = async e =>{
+
+        if(this.state.email === ""){
+            return;
+        }
        
         await this.props.signup(this.state.email)
 
@@ -41,6 +45,10 @@ class index extends Component {
     }
 
     login_btn = async e => {
+
+        if(this.state.usercode === ""){
+            return;
+        }
     
         await this.props.login(this.state.usercode)
         await axios.get(`http://localhost:8080/user/login/${this.props.user.usercode}`)
@@ -54,7 +62,7 @@ class index extends Component {
         })
         .catch( response => { 
             console.log(response)
-        alert("[error] usercode : "+this.state.usercode+" is not found") } );
+            alert(this.state.usercode+"는 존재하지 않는 코드입니다.") } );
         
 
     }
@@ -69,11 +77,11 @@ class index extends Component {
             <div id="userpage_wrap">
                 <div id="login_wrap">
                     <div className="login_title_wrap">
-                        <h2>login</h2>
+                        <h2>Login</h2>
                     </div>
                     <div className="login_action_wrap">
                         
-                        <input id="usercode" placeholder="USERCODE" value={this.state.usercode} onChange={this.handleChange}/>
+                        <input id="usercode" placeholder="UserCode" value={this.state.usercode} onChange={this.handleChange}/>
                         
                     </div>
                     <div className="login_action_button_wrap">
@@ -83,18 +91,18 @@ class index extends Component {
 
                 <div id="signup_wrap">
                     <div className="login_title_wrap">
-                        <h2>signup</h2>
+                        <h2>Join</h2>
                     </div>
 
                     <div className="login_action_wrap">
                         
-                        <input  id="email" placeholder="EMAIL" value={this.state.email} onChange={this.handleChange}/>  
+                        <input  id="email" placeholder="Email" value={this.state.email} onChange={this.handleChange}/>  
                         
                     </div>
                    
                    
                     <div className="login_action_button_wrap">
-                        <button onClick={this.signup_btn}>Signup</button>
+                        <button onClick={this.signup_btn}>Join</button>
                     </div>
                 </div>
 

@@ -4,7 +4,6 @@ export function read(){
     return {
         type:types.READ
     }
-
 }
 
 export const signup = (email) => {
@@ -12,7 +11,6 @@ export const signup = (email) => {
         type:types.SIGNUP,
         email
     }
-
 }
 
 export const login = (usercode) => {

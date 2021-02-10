@@ -56,8 +56,7 @@ class index extends Component {
 let mapStateToProps = (state)=>{
    
     return{
-      
-      user : state.loginuser
+        user : state.loginuser
     }
   }
 

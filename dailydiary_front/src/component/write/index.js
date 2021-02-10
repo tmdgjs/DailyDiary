@@ -84,7 +84,7 @@ class index extends Component {
                 propertytitle : '',
                 propertycontent : '',
                 today : this.todaycode,
-                user : this.user
+                usercode : this.user
             }),
            
         });
@@ -122,6 +122,8 @@ class index extends Component {
             }
 
         }
+
+        console.log(this.state.diary_list)
 
         await axios.post("http://localhost:8080/diary/add",this.state.diary_list
             
